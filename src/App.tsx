@@ -1,26 +1,33 @@
-import { useEffect } from "react"
-import { useSelector } from "react-redux"
+import { Navigate, Route, HashRouter as Router, Routes } from "react-router-dom"
 
-import { RootState } from "./store/store"
-import { loadItems } from "./store/actions/item.actions"
+import { ItemIndex } from "./pages/ItemIndex"
+import { ItemDetails } from "./pages/ItemDetails"
+import { NotFound } from "./pages/NotFound"
+
+import { AppHeader } from "./cmps/layout/AppHeader"
+import { FallbackRoute } from "./cmps/common/FallbackRoute"
 
 
 export function App() {
-
-  const items = useSelector((state: RootState) => state.itemModule.items)
-
-  useEffect(() => {
-    loadItems()
-  }, [])
-
-  if (!items) return <div>Loading...</div>
   return (
-    <>
-      <h1>hello!</h1>
-      <pre>
-        {JSON.stringify(items, null, 2)}
-      </pre>
-    </>
+    <Router>
+      <main className="main-layout">
+        <AppHeader />
+
+        <Routes>
+          <Route path="/" element={<Navigate to="/item" />} />
+          <Route path="/item" element={<ItemIndex />} />
+          <Route path="/item/:id" element={<ItemDetails />} />
+
+          <Route path="*" element={
+            <FallbackRoute            >
+              <NotFound />
+            </FallbackRoute>
+          } />
+        </Routes>
+      </main>
+    </Router>
   )
 }
+
 

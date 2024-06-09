@@ -1,7 +1,7 @@
 import { httpService } from "./http.service"
 import { API_IMAGES_URL, CACHE_VALID_TIME, ITEM_CACHE_KEY } from "./const.service"
 
-import { Item, ItemMapResponse, ItemResponse } from "@/models/item.model"
+import { Item, ItemCacheData, ItemMapResponse, ItemResponse } from "@/models/item.model"
 import { storageService } from "./storage.service"
 
 
@@ -12,13 +12,17 @@ export const itemService = {
 async function getItems() {
 	try {
 		const data = await httpService.get<{}, ItemMapResponse>(API_IMAGES_URL)
-		const items: Item[] = formatItems(data)
+		console.log('**Got data from API**');
 
+		const items: Item[] = formatItems(data)
 		_cacheData(items)
 		return items
 	} catch (err) {
-		const cachedData: Item[] = _loadCachedData()
-		return cachedData
+		const cachedItems = _loadCachedData()
+		if (!cachedItems) return getItems()
+
+		console.log('**Got data from Cache**');
+		return cachedItems
 	}
 }
 
@@ -38,9 +42,8 @@ function createItem(itemId: string, item: ItemResponse): Item {
 	}
 }
 
-function _loadCachedData() {
-	console.log('**Got data from Cache**');
-	const cachedData = storageService.load(ITEM_CACHE_KEY, [])
+function _loadCachedData(): Item[] | null {
+	const cachedData: ItemCacheData = storageService.load(ITEM_CACHE_KEY, [])
 	if (cachedData?.expirationTime < Date.now()) return null
 	return cachedData.data
 }

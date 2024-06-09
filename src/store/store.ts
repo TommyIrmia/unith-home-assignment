@@ -1,18 +1,18 @@
 import { Reducer, combineReducers, compose, legacy_createStore as createStore } from 'redux'
-import { ItemAction, ItemState } from './interfaces/item.store'
-import { itemReducer } from './reducers/item.reducer'
+import { AppAction, AppState } from './interfaces/app.store'
+import { appReducer } from './reducers/app.reducer'
 
 const composeEnhancers = (<any>window).__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose
 
 export interface RootState {
-	itemModule: ItemState
+	appModule: AppState
 }
 
-type AppAction = ItemAction
-type RootReducer = Reducer<RootState, AppAction>
+type StoreAction = AppAction // | OtherAction
+type RootReducer = Reducer<RootState, StoreAction>
 
 const rootReducer = combineReducers({
-	itemModule: itemReducer,
+	appModule: appReducer,
 }) as RootReducer
 
 export const store = createStore(rootReducer, composeEnhancers())

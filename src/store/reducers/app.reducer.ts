@@ -1,33 +1,33 @@
-import { ItemAction, ItemActionType, ItemState } from "../interfaces/item.store"
+import { AppAction, AppActionType, AppState } from "../interfaces/app.store"
 
-const initialState: ItemState = {
+const initialState: AppState = {
 	items: null,
 	activeItem: null,
 	isLoading: false,
 	errors: undefined
 }
 
-export function itemReducer(state = initialState, cmd = {} as ItemAction) {
+export function appReducer(state = initialState, cmd = {} as AppAction) {
 	switch (cmd.type) {
-		case ItemActionType.SET_ITEMS:
+		case AppActionType.SET_ITEMS:
 			return {
 				...state,
 				items: cmd.items
 			}
 
-		case ItemActionType.SET_ACTIVE_ITEM:
+		case AppActionType.SET_ACTIVE_ITEM:
 			return {
 				...state,
 				items: cmd.activeItem
 			}
-			
-		case ItemActionType.SET_ERRORS:
+
+		case AppActionType.SET_ERRORS:
 			return {
 				...state,
 				errors: cmd.errors
 			}
 
-		case ItemActionType.SET_IS_LOADING:
+		case AppActionType.SET_IS_LOADING:
 			return {
 				...state,
 				isLoading: cmd.isLoading
