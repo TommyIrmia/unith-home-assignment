@@ -2,7 +2,7 @@ import { AppAction, AppActionType, AppState } from "../interfaces/app.store"
 
 const initialState: AppState = {
 	items: null,
-	activeItem: null,
+	activeItemId: null,
 	isLoading: false,
 	errors: undefined
 }
@@ -15,10 +15,10 @@ export function appReducer(state = initialState, cmd = {} as AppAction) {
 				items: cmd.items
 			}
 
-		case AppActionType.SET_ACTIVE_ITEM:
+		case AppActionType.SET_ACTIVE_ITEM_ID:
 			return {
 				...state,
-				items: cmd.activeItem
+				activeItemId: cmd.itemId
 			}
 
 		case AppActionType.SET_ERRORS:

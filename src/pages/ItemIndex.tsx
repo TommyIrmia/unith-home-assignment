@@ -7,17 +7,16 @@ import { Loader } from "@/cmps/common/Loader"
 import { ItemList } from "@/cmps/item/ItemList"
 
 export function ItemIndex() {
-	const items = useSelector((state: RootState) => state.appModule.items)
-	const isLoading = useSelector((state: RootState) => state.appModule.isLoading)
+	const items = useSelector((storeState: RootState) => storeState.appModule.items)
+	const isLoading = useSelector((storeState: RootState) => storeState.appModule.isLoading)
 
 	useEffect(() => {
 		loadItems()
 	}, [])
 
 	return <section className="item-index">
-
 		<h5>List of items</h5>
-		{!isLoading && <ItemList items={items!} />}
+		{!isLoading && <ItemList items={items} />}
 		{isLoading && <Loader />}
 	</section>
 }

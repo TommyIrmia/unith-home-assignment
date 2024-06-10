@@ -4,14 +4,14 @@ import { Item } from "@/models/item.model";
 
 export interface AppState {
 	items: Item[] | null
-	activeItem: Item | null
+	activeItemId: Item | null
 	isLoading: boolean
 	errors: AppError[] | undefined
 }
 
 export enum AppActionType {
 	SET_ITEMS = 'SET_ITEMS',
-	SET_ACTIVE_ITEM = 'SET_ACTIVE_ITEM',
+	SET_ACTIVE_ITEM_ID = 'SET_ACTIVE_ITEM_ID',
 	SET_ERRORS = 'SET_ERRORS',
 	SET_IS_LOADING = 'SET_IS_LOADING',
 }
@@ -19,7 +19,7 @@ export enum AppActionType {
 
 export type AppAction =
 	| SetItemsAction
-	| SetActiveItemAction
+	| SetActiveItemIdAction
 	| SetErrorsAction
 	| SetIsLoadingAction
 
@@ -29,9 +29,9 @@ interface SetItemsAction {
 	items: Item[]
 }
 
-interface SetActiveItemAction {
-	type: AppActionType.SET_ACTIVE_ITEM
-	activeItem: Item
+interface SetActiveItemIdAction {
+	type: AppActionType.SET_ACTIVE_ITEM_ID
+	itemId: string | null
 }
 
 interface SetErrorsAction {

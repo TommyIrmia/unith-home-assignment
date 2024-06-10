@@ -1,5 +1,5 @@
 import { httpService } from "./http.service"
-import { API_IMAGES_URL, CACHE_VALID_TIME, ITEM_CACHE_KEY } from "./const.service"
+import { API_IMAGES_URL, CACHE_VALID_TIME, ITEM_CACHE_KEY, MAX_FETCH_RETRIES } from "./const.service"
 
 import { Item, ItemCacheData, ItemMapResponse, ItemResponse } from "@/models/item.model"
 import { storageService } from "./storage.service"
@@ -9,9 +9,9 @@ export const itemService = {
 	getItems,
 }
 
-async function getItems() {
+async function getItems(retryCount = 0) {
 	try {
-		const data = await httpService.get<{}, ItemMapResponse>(API_IMAGES_URL)
+		const data = await httpService.get<ItemMapResponse>(API_IMAGES_URL)
 		console.log('**Got data from API**');
 
 		const items: Item[] = formatItems(data)
@@ -19,10 +19,17 @@ async function getItems() {
 		return items
 	} catch (err) {
 		const cachedItems = _loadCachedData()
-		if (!cachedItems) return getItems()
 
-		console.log('**Got data from Cache**');
-		return cachedItems
+		if (cachedItems) {
+			console.log('**Got data from Cache**');
+			return cachedItems
+		}
+
+		if (retryCount < MAX_FETCH_RETRIES) {
+			return getItems(retryCount + 1)
+		}
+
+		throw err
 	}
 }
 

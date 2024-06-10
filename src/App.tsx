@@ -17,10 +17,10 @@ export function App() {
         <Routes>
           <Route path="/" element={<Navigate to="/item" />} />
           <Route path="/item" element={<ItemIndex />} />
-          <Route path="/item/:id" element={<ItemDetails />} />
+          <Route path="/item/:itemId" element={<ItemDetails />} />
 
           <Route path="*" element={
-            <FallbackRoute            >
+            <FallbackRoute>
               <NotFound />
             </FallbackRoute>
           } />

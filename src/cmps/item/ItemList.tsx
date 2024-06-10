@@ -6,12 +6,13 @@ import { Item } from "@/models/item.model"
 
 
 interface ItemListProps {
-	items: Item[]
+	items: Item[] | null
 }
 
 
 export function ItemList({ items }: ItemListProps) {
 
+	if(!items) return <div>Something went wrong..</div>
 	if (!items?.length) return <div>No items to show..</div>
 	return <ul className="item-list clean-list">
 		{items.map(item => <li key={item.id}>

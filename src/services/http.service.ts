@@ -1,18 +1,20 @@
-import axios, { AxiosResponse, Method } from 'axios'
 import DOMPurify from 'dompurify'
+import axios, { AxiosResponse, Method } from 'axios'
+
 import { setError } from '../store/actions/app.actions';
+import { IndexSignature } from '@/models/app.model';
 
 export const httpService = {
-    get<T, R>(endpoint: string, params?: T): Promise<R> {
+    get<R, T = IndexSignature>(endpoint: string, params?: T): Promise<R> {
         return ajax(endpoint, 'GET', params)
     },
-    post<T, R>(endpoint: string, data?: T): Promise<R> {
+    post<R, T>(endpoint: string, data?: T): Promise<R> {
         return ajax(endpoint, 'POST', data)
     },
-    put<T, R>(endpoint: string, data?: T): Promise<R> {
+    put<R, T>(endpoint: string, data?: T): Promise<R> {
         return ajax(endpoint, 'PUT', data)
     },
-    delete<T, R>(endpoint: string, data?: T): Promise<R> {
+    delete<R, T>(endpoint: string, data?: T): Promise<R> {
         return ajax(endpoint, 'DELETE', data)
     }
 }
@@ -25,25 +27,21 @@ const axiosClient = axios.create({
 
 axiosClient.interceptors.response.use(response => response,
     error => {
-        const errorMessage = error.response?.data?.message || 'Network error';
-        const errorId = error.response?.status || 0;
+        console.log('error.response', error.response)
 
-        console.log(`Error : ${errorId} with API call: `, errorMessage);
+        const errorCode = error.response?.status || 0;
+        const errorMessage = `${error.response.statusText || 'Network error'} :  ${error.response.data.error || error.response.data.detail}`;
+        const requestUrl = error.response?.config.url || 'Unknown URL';
+        console.log(`Error : ${errorCode} with API call to ${requestUrl} :`, errorMessage);
 
-        setError({
-            id: `${errorId}-${new Date().toISOString()}`,
-            message: errorMessage,
-            date: new Date(),
-            code: errorId
-        })
-
-        return Promise.reject(error);
+        const addedError = setError({ code: errorCode, message: errorMessage, additionalInfo: 'Path : ' + requestUrl })
+        return Promise.reject(addedError);
     }
 )
 
-async function ajax<T, R>(endpoint: string, method: Method = 'GET', data: T) {
+async function ajax<R, T>(endpoint: string, method: Method = 'GET', data: T): Promise<R> {
     endpoint = DOMPurify.sanitize(endpoint)
-    method = DOMPurify.sanitize(method)
+    method = DOMPurify.sanitize(method) as Method
 
     try {
         const res: AxiosResponse<R> = await axiosClient({
