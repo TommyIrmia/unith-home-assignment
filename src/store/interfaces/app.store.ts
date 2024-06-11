@@ -1,5 +1,5 @@
-import { AppError } from "@/models/app.model";
-import { Item } from "@/models/item.model";
+import { AppError } from "@/models/app.model"
+import { Item } from "@/models/item.model"
 
 
 export interface AppState {

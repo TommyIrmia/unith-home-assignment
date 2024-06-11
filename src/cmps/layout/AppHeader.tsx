@@ -1,7 +1,8 @@
-import { Link } from "react-router-dom";
-import { Image } from "../common/Image";
+import { Link } from "react-router-dom"
 
-import Logo from "@/assets/images/logo.png";
+import { Image } from "@/cmps/common/Image"
+
+import Logo from "@/assets/images/logo.png"
 
 
 export function AppHeader() {

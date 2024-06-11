@@ -1,10 +1,11 @@
-import { useState } from 'react';
-import { LazyLoadImage } from 'react-lazy-load-image-component';
+import { useState } from 'react'
+import { LazyLoadImage } from 'react-lazy-load-image-component'
 
-import defaultImg from '@/assets/images/default-img.avif';
-import Skeleton from 'react-loading-skeleton';
-import 'react-loading-skeleton/dist/skeleton.css';
-import 'react-lazy-load-image-component/src/effects/blur.css';
+import defaultImg from '@/assets/images/default-img.avif'
+import Skeleton from 'react-loading-skeleton'
+
+import 'react-loading-skeleton/dist/skeleton.css'
+import 'react-lazy-load-image-component/src/effects/blur.css'
 
 interface ImageProps {
 	width?: string
@@ -27,11 +28,6 @@ export function Image({ imgUrl = defaultImg, altTxt = "", width = '100%', height
 		setImgError(true);
 	}
 
-	console.log('imgUrl', imgUrl)
-	console.log('isImgError', isImgError)
-
-
-
 	const containerStyle = { width, height }
 	return <div className="img-container" style={containerStyle}>
 		{!isImgLoaded && !isImgError && (
@@ -39,6 +35,7 @@ export function Image({ imgUrl = defaultImg, altTxt = "", width = '100%', height
 				<Skeleton className="skeleton-custom" width="100%" height="100%" />
 			</div>
 		)}
+		
 		<LazyLoadImage
 			src={!isImgError ? imgUrl : defaultImg}
 			alt={altTxt}

@@ -1,8 +1,8 @@
 import DOMPurify from 'dompurify'
 import axios, { AxiosResponse, Method } from 'axios'
 
-import { setError } from '../store/actions/app.actions';
-import { IndexSignature } from '@/models/app.model';
+import { setError } from '@/store/actions/app.actions'
+import { AppError, IndexSignature } from '@/models/app.model'
 
 export const httpService = {
     get<R, T = IndexSignature>(endpoint: string, params?: T): Promise<R> {
@@ -32,7 +32,7 @@ axiosClient.interceptors.response.use(response => response,
         const requestUrl = error.response?.config.url || 'Unknown URL';
         console.log(`Error : ${errorCode} with API call to ${requestUrl} :`, errorMessage);
 
-        const addedError = setError({ code: errorCode, message: errorMessage, additionalInfo: 'Path : ' + requestUrl })
+        const addedError: AppError = setError({ code: errorCode, message: errorMessage, additionalInfo: 'Path : ' + requestUrl })
         return Promise.reject(addedError);
     }
 )

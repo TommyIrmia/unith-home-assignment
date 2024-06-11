@@ -65,3 +65,29 @@
   }
 }
 
+// Mixin for font-styles
+@mixin fontType($type: bold) {
+  // type options:
+  // 1.thin
+  // 2.light
+  // 3.bold
+  // 4.black
+  // 3.bold-spaced
+  // 3.black-spaced
+
+  @if $type == thin {
+    font-family: lato-thin;
+  } @else if $type == light {
+    font-family: lato-light;
+  } @else if $type == bold {
+    font-family: lato-bold;
+  } @else if $type == black {
+    font-family: lato-black;
+  } @else if $type == bold-spaced {
+    font-family: lato-bold;
+    letter-spacing: 0.1em;
+  } @else if $type == black-spaced {
+    font-family: lato-black;
+    letter-spacing: 0.1em;
+  }
+}

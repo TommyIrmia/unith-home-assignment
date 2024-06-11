@@ -1,4 +1,4 @@
-import { AppAction, AppActionType, AppState } from "../interfaces/app.store"
+import { AppAction, AppActionType, AppState } from "@/store/interfaces/app.store"
 
 const initialState: AppState = {
 	items: null,

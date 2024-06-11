@@ -1,8 +1,9 @@
-import { httpService } from "./http.service"
-import { API_IMAGES_URL, CACHE_VALID_TIME, ITEM_CACHE_KEY, MAX_FETCH_RETRIES } from "./const.service"
+import { httpService } from "@/services/http.service"
+import { storageService } from "@/services/storage.service"
+
+import { API_IMAGES_URL, CACHE_VALID_TIME, ITEM_CACHE_KEY, MAX_FETCH_RETRIES } from "@/services/const.service"
 
 import { Item, ItemCacheData, ItemMapResponse, ItemResponse } from "@/models/item.model"
-import { storageService } from "./storage.service"
 
 
 export const itemService = {
@@ -43,7 +44,7 @@ function createItem(itemId: string, item: ItemResponse): Item {
 	return {
 		id: itemId,
 		desc: item.description,
-		imgUrl: item.image,
+		imgUrl: item.image === 'empty' ? '' : item.image,
 		title: item.title,
 		idx: item.index,
 	}

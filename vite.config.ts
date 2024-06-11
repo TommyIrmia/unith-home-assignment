@@ -1,6 +1,5 @@
 import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
-// Is needed?
 import svgr from 'vite-plugin-svgr'
 
 // https://vitejs.dev/config/

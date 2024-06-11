@@ -1,5 +1,6 @@
 .main-layout {
 	padding-top: $top-padding;
+	padding-bottom: $bottom-padding;
 
 	display: grid;
 	grid-template-columns: $layout-padding 1fr $layout-padding;

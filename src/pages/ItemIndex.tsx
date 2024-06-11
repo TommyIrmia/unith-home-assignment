@@ -5,11 +5,14 @@ import { RootState } from "@/store/store"
 import { loadItems } from "@/store/actions/app.actions"
 import { Loader } from "@/cmps/common/Loader"
 import { ItemList } from "@/cmps/item/ItemList"
+import { useScrollToTop } from "@/customHooks/useScrollToTop"
 
 export function ItemIndex() {
 	const activeItemId = useSelector((storeState: RootState) => storeState.appModule.activeItemId)
 	const items = useSelector((storeState: RootState) => storeState.appModule.items)
 	const isLoading = useSelector((storeState: RootState) => storeState.appModule.isLoading)
+
+	useScrollToTop()
 
 	useEffect(() => {
 		if (!items) loadItems()

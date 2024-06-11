@@ -1,6 +1,6 @@
 import { Reducer, combineReducers, compose, legacy_createStore as createStore } from 'redux'
-import { AppAction, AppState } from './interfaces/app.store'
-import { appReducer } from './reducers/app.reducer'
+import { AppAction, AppState } from '@/store/interfaces/app.store'
+import { appReducer } from '@/store/reducers/app.reducer'
 
 const composeEnhancers = (<any>window).__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose
 

@@ -1,5 +1,5 @@
-import { store } from "../store"
-import { AppActionType } from "../interfaces/app.store"
+import { store } from "@/store/store"
+import { AppActionType } from "@/store/interfaces/app.store"
 
 import { itemService } from "@/services/item.service"
 import { errorService } from "@/services/error.service"
@@ -16,10 +16,10 @@ export async function loadItems() {
 	try {
 		const items = await itemService.getItems()
 		store.dispatch({ type: AppActionType.SET_ITEMS, items })
-	} catch (err: any) {
-		console.log('[itemActions -> loadItems()] : Had issues loading items', err)
-		setError({ code: err.code, message: "Failed loading items" })
-		throw err
+	} catch (err) {
+		const appError = err as AppError;
+		setError({ code: appError.code, message: "Failed loading items" })
+		throw appError
 	} finally {
 		setIsLoading(false)
 	}
@@ -31,12 +31,7 @@ export function setActiveItemId(itemId: string | null = null) {
 
 export function setError(error: Partial<AppError>): AppError {
 	const errors = store.getState().appModule.errors || []
-	console.log('errors', errors)
-
-
 	const errorToAdd = errorService.createError(error)
-	console.log('errorToAdd', errorToAdd)
-
 	store.dispatch({ type: AppActionType.SET_ERRORS, errors: [...errors, errorToAdd] })
 	return errorToAdd
 }

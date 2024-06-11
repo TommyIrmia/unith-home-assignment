@@ -1,4 +1,4 @@
-import { IndexSignature } from "./app.model"
+import { IndexSignature } from "@/models/app.model"
 
 export interface Item {
 	id: string
