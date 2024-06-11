@@ -1,15 +1,13 @@
-// public/service-worker.js
-// import { setError } from './src/store/actions/item.actions';
 
 const CACHE_NAME = 'image-cache';
 const DYNAMIC_CACHE = 'dynamic-image-cache';
 
 self.addEventListener('install', (event) => {
-	console.log('Installed11', event);
-	self.skipWaiting(); // Activate worker immediately after installation
+	self.skipWaiting(); // Activate worker immediately
 });
 
 self.addEventListener('activate', (event) => {
+	// When activated - clear unrelevant caches
 	event.waitUntil(
 		caches.keys().then((cacheNames) => {
 			return Promise.all(
@@ -21,7 +19,8 @@ self.addEventListener('activate', (event) => {
 });
 
 self.addEventListener('fetch', (event) => {
-	if (event.request.url.match(/picsum|.*\.(jpeg|jpg|png|gif)$/)) {
+	// Check if fetch request is for image - and check if exists in cache
+	if (event.request.url.match(/(picsum|jpeg|jpg|png|gif|svg)$/)) {
 		event.respondWith(
 			caches.match(event.request)
 				.then((response) => {

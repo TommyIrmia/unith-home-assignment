@@ -1,4 +1,4 @@
-import { useEffect } from "react"
+import { useEffect, useState } from "react"
 import { useSelector } from "react-redux"
 import { useNavigate, useParams } from "react-router"
 import { Link } from "react-router-dom"
@@ -11,45 +11,45 @@ import { RootState } from "@/store/store"
 
 import { Loader } from "@/cmps/common/Loader"
 import { Item } from "@/models/item.model"
+import { Image } from "@/cmps/common/Image";
 
 
 export function ItemDetails() {
+	const activeItemId = useSelector((storeState: RootState) => storeState.appModule.activeItemId)
 	const items = useSelector((storeState: RootState) => storeState.appModule.items)
 	const isLoading = useSelector((storeState: RootState) => storeState.appModule.isLoading)
+
+	const [item, setItem] = useState<Item | null>(null)
 
 	const { itemId } = useParams()
 	const navigate = useNavigate()
 
 	useEffect(() => {
-		setActiveItemId(itemId)
-		if (!items) {
-			loadItems()
-		}
-	}, [itemId])
+		if (!items) loadItems()
+	}, [])
 
-	function getItemById(): Item | null | void {
+	useEffect(() => {
+		if (itemId !== activeItemId) setActiveItemId(itemId)
+		getItemById()
+	}, [items, itemId])
+
+	function getItemById(): void {
 		try {
-			if (!items) return null
+			if (!items) return
 			const item = items?.find((item) => item.id === itemId)
 			if (!item) throw new Error('item not found')
-			return item
+			setItem(item)
 		} catch (err) {
-			console.log('Error loading item', err)
-			setError(404, err as string)
+			setError({ code: 404, message: err as string })
 			navigate('/item')
 		}
 	}
 
-	const item = getItemById()
 	if (!item || isLoading) return <Loader />
 	return <section className="item-details">
 		<Link to="/item">Go home</Link>
-		{/* <LazyLoadImage
-			src={item.imgUrl}
-			alt={item.title}
-			effect="blur" // Optional effect
-		/> */}
-		<img src={item.imgUrl} alt={item.title} loading="lazy" style={{ width: '100%', height: 'auto' }} />
+
+		<Image imgUrl={item.imgUrl} altTxt={item.title} />
 
 		<h2>{item.title}</h2>
 		<h4>{item.desc}</h4>

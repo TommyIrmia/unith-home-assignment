@@ -1,0 +1,26 @@
+header.app-header {
+	.app-header-content {
+		margin-top: 0.7rem;
+		margin-inline: auto;
+		padding: 0.75rem 1rem;
+		outline: 3px $text-primary;
+		border-radius: 1.25rem;
+		box-shadow: 0 7px 15px 2px rgba(0, 0, 0, 0.2);
+
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+
+		background-color: rgba(196, 194, 209, 0.4);
+		backdrop-filter: blur(10px);
+
+		width: calc(100% - $layout-padding * 2);
+		max-width: $max-layout-width;
+
+		position: fixed;
+		top: 0;
+		left: 0;
+		right: 0;
+		z-index: 200;
+	}
+}

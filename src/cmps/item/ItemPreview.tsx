@@ -1,17 +1,15 @@
 import { Item } from "@/models/item.model"
-//@ts-ignore
-import { LazyLoadImage } from 'react-lazy-load-image-component';
+import { Image } from "../common/Image"
 
 interface ItemPreviewProps {
 	item: Item
+	activeItemId: string | null
 }
 
-export function ItemPreview({ item }: ItemPreviewProps) {
-	return <article className="item-preview">
-		<LazyLoadImage src={item.imgUrl}
-			alt={item.title}
-			effect="blur" // Optional effect
-		/>
+export function ItemPreview({ item, activeItemId }: ItemPreviewProps) {
+	const isActive = activeItemId === item.id
+	return <article className={`item-preview${isActive ? ' active' : ''}`}>
+		<Image imgUrl={item.imgUrl} altTxt={item.title} />
 		<h2>{item.title}</h2>
 		<p>{item.desc}</p>
 	</article>

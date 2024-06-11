@@ -4,7 +4,7 @@ import { Item } from "@/models/item.model";
 
 export interface AppState {
 	items: Item[] | null
-	activeItemId: Item | null
+	activeItemId: string | null
 	isLoading: boolean
 	errors: AppError[] | undefined
 }

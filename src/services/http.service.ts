@@ -27,8 +27,6 @@ const axiosClient = axios.create({
 
 axiosClient.interceptors.response.use(response => response,
     error => {
-        console.log('error.response', error.response)
-
         const errorCode = error.response?.status || 0;
         const errorMessage = `${error.response.statusText || 'Network error'} :  ${error.response.data.error || error.response.data.detail}`;
         const requestUrl = error.response?.config.url || 'Unknown URL';

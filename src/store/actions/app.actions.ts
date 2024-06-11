@@ -19,8 +19,7 @@ export async function loadItems() {
 	} catch (err: any) {
 		console.log('[itemActions -> loadItems()] : Had issues loading items', err)
 		setError({ code: err.code, message: "Failed loading items" })
-
-		// throw err
+		throw err
 	} finally {
 		setIsLoading(false)
 	}
@@ -36,6 +35,7 @@ export function setError(error: Partial<AppError>): AppError {
 
 
 	const errorToAdd = errorService.createError(error)
+	console.log('errorToAdd', errorToAdd)
 
 	store.dispatch({ type: AppActionType.SET_ERRORS, errors: [...errors, errorToAdd] })
 	return errorToAdd

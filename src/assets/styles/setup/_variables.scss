@@ -11,13 +11,15 @@ $bg-secondary: #4e74ff;
 $bg-transition: linear-gradient(#eff3fb, #eff3fb 56%, #fff), linear-gradient(254deg, #eff3fb, #eff3fb 56%, #fff);
 
 // LAYOUT
-$layoutPadding: 20px;
+$top-padding: 90px;
+$layout-padding: 40px;
+$max-layout-width: 1600px;
 
 // LAYOUT BREAKPOINTS
 $break-narrow: 780px;
 $break-normal: 1200px;
 $break-wide: 1920px;
 
-$padded-break-narrow: $break-narrow + $layoutPadding * 2;
-$padded-break-normal: $break-normal + $layoutPadding * 2;
-$padded-break-wide: $break-wide + $layoutPadding * 2;
+$padded-break-narrow: $break-narrow + $layout-padding * 2;
+$padded-break-normal: $break-normal + $layout-padding * 2;
+$padded-break-wide: $break-wide + $layout-padding * 2;

@@ -9,7 +9,7 @@ export const itemService = {
 	getItems,
 }
 
-async function getItems(retryCount = 0) {
+async function getItems(retryCount = 0): Promise<Item[]> {
 	try {
 		const data = await httpService.get<ItemMapResponse>(API_IMAGES_URL)
 		console.log('**Got data from API**');

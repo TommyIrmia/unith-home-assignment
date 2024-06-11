@@ -5,15 +5,16 @@ export const errorService = {
 	createError,
 }
 
-
-
 function createError({ code = 0, message = "", additionalInfo = "" }: Partial<AppError>): AppError {
 	const now = new Date()
-	return {
+	
+	const error: AppError = {
 		id: `${code}-${now.toISOString()}`,
 		message: message,
 		date: now,
 		code: code,
-		additionalInfo,
 	}
+
+	if (additionalInfo) error.additionalInfo = additionalInfo
+	return error
 }

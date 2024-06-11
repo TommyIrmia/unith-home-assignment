@@ -1,4 +1,4 @@
-import { Navigate, Route, HashRouter as Router, Routes } from "react-router-dom"
+import { Navigate, Route, BrowserRouter as Router, Routes } from "react-router-dom"
 
 import { ItemIndex } from "./pages/ItemIndex"
 import { ItemDetails } from "./pages/ItemDetails"

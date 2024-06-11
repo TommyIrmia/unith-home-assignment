@@ -1,0 +1,41 @@
+.item-preview {
+	&.active {
+		border: 1px solid red;
+	}
+
+	.img-container {
+		border-radius: 0.5rem;
+		overflow: hidden;
+		
+		position: relative;
+
+		max-width: 100%;
+
+
+		@include aspect-ratio(1, 1);
+
+		.skeleton-container {
+			position: absolute;
+			inset: 0;
+		}
+
+		img {
+		}
+	}
+}
+
+.skeleton-custom {
+	background-color: #f0f0f0;
+	background-image: linear-gradient(90deg, #f0f0f0, #e0e0e0, #f0f0f0);
+	background-size: 200% 100%;
+	animation: shimmer 2.5s infinite linear;
+}
+
+@keyframes shimmer {
+	0% {
+		background-position: -200% 0;
+	}
+	100% {
+		background-position: 200% 0;
+	}
+}
