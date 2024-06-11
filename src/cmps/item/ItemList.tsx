@@ -27,6 +27,7 @@ export function ItemList({ items, activeItemId }: ItemListProps) {
 		})
 	}
 
+	if (!items?.length) return <div>No items to show..</div>
 	const itemsToShow = items.slice(0, pageIdx * NUM_ITEMS_TO_SHOW)
 	return <ul className="item-list clean-list">
 		{itemsToShow.map(item => <li key={item.id}>

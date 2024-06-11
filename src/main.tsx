@@ -6,6 +6,7 @@ import { App } from '@/App.tsx'
 import { store } from '@/store/store'
 
 import '@/assets/styles/main.scss'
+import { devLog } from './services/dev-log.service'
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <Provider store={store}>
@@ -17,10 +18,10 @@ if ('serviceWorker' in navigator) {
   window.addEventListener('load', () => {
     navigator.serviceWorker.register('/service-worker.js')
       .then((registration) => {
-        console.log('Service Worker registered with scope:', registration.scope);
+        devLog('Service Worker registered with scope:', registration.scope);
       })
       .catch((err) => {
-        console.log('Service Worker registration failed:', err);
+        devLog('Service Worker registration failed:', err);
       });
   });
 }

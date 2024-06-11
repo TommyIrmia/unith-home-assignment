@@ -38,8 +38,10 @@ export function ItemDetails() {
 
 	function getItemById(): void {
 		try {
+			// For first load incase the items are not loaded yet
 			if (!items) return
 			const item = items?.find((item) => item.id === itemId)
+
 			if (!item) throw new Error('item not found')
 			setItem(item)
 		} catch (err) {
@@ -48,9 +50,9 @@ export function ItemDetails() {
 		}
 	}
 
-	console.log('BackIcon', BackIcon)
 	if (!item || isLoading) return <Loader />
 	const shouldShowLongTxt = Math.random() > 0.5
+	
 	return <section className="item-details">
 		<Image imgUrl={item.imgUrl} altTxt={item.title} objectFit="contain" />
 

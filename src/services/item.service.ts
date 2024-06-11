@@ -4,6 +4,7 @@ import { storageService } from "@/services/storage.service"
 import { API_IMAGES_URL, CACHE_VALID_TIME, ITEM_CACHE_KEY, MAX_FETCH_RETRIES } from "@/services/const.service"
 
 import { Item, ItemCacheData, ItemMapResponse, ItemResponse } from "@/models/item.model"
+import { devLog } from "./dev-log.service"
 
 
 export const itemService = {
@@ -13,7 +14,7 @@ export const itemService = {
 async function getItems(retryCount = 0): Promise<Item[]> {
 	try {
 		const data = await httpService.get<ItemMapResponse>(API_IMAGES_URL)
-		console.log('**Got data from API**');
+		devLog('**Got data from API**');
 
 		const items: Item[] = formatItems(data)
 		_cacheData(items)
@@ -22,7 +23,7 @@ async function getItems(retryCount = 0): Promise<Item[]> {
 		const cachedItems = _loadCachedData()
 
 		if (cachedItems) {
-			console.log('**Got data from Cache**');
+			devLog('**Got data from Cache**');
 			return cachedItems
 		}
 

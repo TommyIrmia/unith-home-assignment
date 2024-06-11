@@ -1,0 +1,23 @@
+.error-page {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	gap: 3rem;
+	padding: rem(20px);
+
+	h1 {
+		font-size: rem(40px);
+		color: $text-primary;
+	}
+	h4 {
+		margin-bottom: 1rem;
+	}
+	p {
+		font-size: rem(18px);
+		color: $text-secondary;
+	}
+	a {
+		text-decoration: underline;
+		color: $clr-brand;
+	}
+}

@@ -1,6 +1,8 @@
 
 export function Loader() {
-	return <div className="loader">
-		Loading...
-	</div>
+	return <section className="loader-overlay">
+		<div className="loader">
+			<div className="spinner"></div>
+		</div>
+	</section>
 }

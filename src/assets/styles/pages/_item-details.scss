@@ -17,20 +17,21 @@
 	box-shadow: 0 0 8px rgba(0, 0, 0, 0.096);
 
 	.item-details-content {
-		padding: 1rem 2rem;
+		padding: 1rem 3.5rem;
 		position: relative;
 
 		.back-img {
+			background: white;
+			border-radius: 50%;
 			position: absolute;
 			top: 1.5rem;
-			left: 0.1rem;
+			left: 1rem;
 			max-height: 2rem;
 			max-width: 2rem;
 			overflow: visible;
 		}
 
 		h2 {
-			text-align: left;
 			color: $text-primary;
 			font-size: rem(40px);
 			padding-bottom: 1rem;
@@ -42,6 +43,7 @@
 		p {
 			font-size: rem(20px);
 			color: $text-secondary;
+			padding-bottom: 2rem;
 		}
 	}
 
@@ -64,9 +66,7 @@
 			grid-column: 1;
 			grid-row: 1;
 
-			h2 {
-				text-align: left;
-			}
+			padding-inline: 4rem;
 
 			.back-img {
 				top: 1.5rem;

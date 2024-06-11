@@ -1,9 +1,9 @@
-import { AppAction, AppActionType, AppState } from "@/store/interfaces/app.store"
+	import { AppAction, AppActionType, AppState } from "@/store/interfaces/app.store"
 
 const initialState: AppState = {
 	items: null,
 	activeItemId: null,
-	isLoading: false,
+	isLoading: true,
 	errors: undefined
 }
 

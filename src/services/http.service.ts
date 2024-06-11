@@ -3,6 +3,7 @@ import axios, { AxiosResponse, Method } from 'axios'
 
 import { setError } from '@/store/actions/app.actions'
 import { AppError, IndexSignature } from '@/models/app.model'
+import { devLog } from './dev-log.service'
 
 export const httpService = {
     get<R, T = IndexSignature>(endpoint: string, params?: T): Promise<R> {
@@ -30,7 +31,7 @@ axiosClient.interceptors.response.use(response => response,
         const errorCode = error.response?.status || 0;
         const errorMessage = `${error.response.statusText || 'Network error'} :  ${error.response.data.error || error.response.data.detail}`;
         const requestUrl = error.response?.config.url || 'Unknown URL';
-        console.log(`Error : ${errorCode} with API call to ${requestUrl} :`, errorMessage);
+        devLog(`Error : ${errorCode} with API call to ${requestUrl} :`, errorMessage);
 
         const addedError: AppError = setError({ code: errorCode, message: errorMessage, additionalInfo: 'Path : ' + requestUrl })
         return Promise.reject(addedError);
@@ -50,7 +51,7 @@ async function ajax<R, T>(endpoint: string, method: Method = 'GET', data: T): Pr
         })
         return res.data
     } catch (err) {
-        console.log(`Had Issues ${method}ing to the backend, endpoint: ${endpoint}, with data: `, data, err)
+        devLog(`Had Issues ${method}ing to the backend, endpoint: ${endpoint}, with data: `, data, err)
         throw err
     }
 }
