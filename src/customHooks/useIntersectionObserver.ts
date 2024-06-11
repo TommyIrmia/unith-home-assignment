@@ -7,7 +7,6 @@ interface UseIntersectionObserverProps {
 
 
 export function useIntersectionObserver({ elRef, cb }: UseIntersectionObserverProps): void {
-
 	useEffect(() => {
 		if (!elRef.current) return
 

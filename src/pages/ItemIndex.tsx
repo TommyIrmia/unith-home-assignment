@@ -10,7 +10,7 @@ import { Loader } from "@/cmps/common/Loader"
 import { ItemList } from "@/cmps/item/ItemList"
 import { Error } from '@/cmps/common/Error'
 
-export function ItemIndex() {
+function ItemIndex() {
 	const activeItemId = useSelector((storeState: RootState) => storeState.appModule.activeItemId)
 	const items = useSelector((storeState: RootState) => storeState.appModule.items)
 	const isLoading = useSelector((storeState: RootState) => storeState.appModule.isLoading)
@@ -29,3 +29,5 @@ export function ItemIndex() {
 		</>}
 	</section>
 }
+
+export default ItemIndex

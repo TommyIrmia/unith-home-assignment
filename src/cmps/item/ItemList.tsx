@@ -3,7 +3,7 @@ import { Link } from "react-router-dom"
 import { ItemPreview } from "@/cmps/item/ItemPreview"
 
 import { Item } from "@/models/item.model"
-import { useRef, useState } from "react"
+import { FC, memo, useMemo, useRef, useState } from "react"
 import { NUM_ITEMS_TO_SHOW } from "@/services/const.service"
 import { useIntersectionObserver } from "@/customHooks/useIntersectionObserver"
 
@@ -12,7 +12,7 @@ interface ItemListProps {
 	activeItemId: string | null
 }
 
-export function ItemList({ items, activeItemId }: ItemListProps) {
+export const ItemList: FC<ItemListProps> = memo(({ items, activeItemId }) => {
 
 	const [pageIdx, setPageIdx] = useState<number>(1)
 	const loadingRef = useRef<HTMLLIElement | null>(null)
@@ -28,7 +28,7 @@ export function ItemList({ items, activeItemId }: ItemListProps) {
 	}
 
 	if (!items?.length) return <div>No items to show..</div>
-	const itemsToShow = items.slice(0, pageIdx * NUM_ITEMS_TO_SHOW)
+	const itemsToShow = useMemo(() => items.slice(0, pageIdx * NUM_ITEMS_TO_SHOW), [pageIdx, items])
 	return <ul className="item-list clean-list">
 		{itemsToShow.map(item => <li key={item.id}>
 			<Link to={`/item/${item.id}`}>
@@ -37,4 +37,4 @@ export function ItemList({ items, activeItemId }: ItemListProps) {
 		</li>)}
 		<li className="loading-item" ref={loadingRef} style={{ height: '0px' }}></li>
 	</ul>
-}
+})

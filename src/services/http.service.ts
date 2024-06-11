@@ -51,7 +51,7 @@ async function ajax<R, T>(endpoint: string, method: Method = 'GET', data: T): Pr
         })
         return res.data
     } catch (err) {
-        devLog(`Had Issues ${method}ing to the backend, endpoint: ${endpoint}, with data: `, data, err)
+        devLog(`[HttpService -> Ajax()] : Had Issues ${method}ing to the backend, endpoint: ${endpoint}, with data: `, data, err)
         throw err
     }
 }

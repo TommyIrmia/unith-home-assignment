@@ -12,7 +12,7 @@ export interface AppState {
 export enum AppActionType {
 	SET_ITEMS = 'SET_ITEMS',
 	SET_ACTIVE_ITEM_ID = 'SET_ACTIVE_ITEM_ID',
-	SET_ERRORS = 'SET_ERRORS',
+	SET_ERROR = 'SET_ERROR',
 	SET_IS_LOADING = 'SET_IS_LOADING',
 }
 
@@ -20,7 +20,7 @@ export enum AppActionType {
 export type AppAction =
 	| SetItemsAction
 	| SetActiveItemIdAction
-	| SetErrorsAction
+	| SetErrorAction
 	| SetIsLoadingAction
 
 
@@ -34,9 +34,9 @@ interface SetActiveItemIdAction {
 	itemId: string | null
 }
 
-interface SetErrorsAction {
-	type: AppActionType.SET_ERRORS
-	errors: AppError[]
+interface SetErrorAction {
+	type: AppActionType.SET_ERROR
+	error: AppError
 }
 
 interface SetIsLoadingAction {

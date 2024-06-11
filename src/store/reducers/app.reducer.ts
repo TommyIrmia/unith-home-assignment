@@ -1,4 +1,4 @@
-	import { AppAction, AppActionType, AppState } from "@/store/interfaces/app.store"
+import { AppAction, AppActionType, AppState } from "@/store/interfaces/app.store"
 
 const initialState: AppState = {
 	items: null,
@@ -12,7 +12,7 @@ export function appReducer(state = initialState, cmd = {} as AppAction) {
 		case AppActionType.SET_ITEMS:
 			return {
 				...state,
-				items: cmd.items
+				items: cmd.items,
 			}
 
 		case AppActionType.SET_ACTIVE_ITEM_ID:
@@ -21,10 +21,10 @@ export function appReducer(state = initialState, cmd = {} as AppAction) {
 				activeItemId: cmd.itemId
 			}
 
-		case AppActionType.SET_ERRORS:
+		case AppActionType.SET_ERROR:
 			return {
 				...state,
-				errors: cmd.errors
+				errors: state.errors?.length ? [...state.errors, cmd.error] : [cmd.error]
 			}
 
 		case AppActionType.SET_IS_LOADING:

@@ -15,7 +15,7 @@ import BackIcon from "@/assets/images/back.png"
 import { Item } from "@/models/item.model"
 
 
-export function ItemDetails() {
+function ItemDetails() {
 	const activeItemId = useSelector((storeState: RootState) => storeState.appModule.activeItemId)
 	const items = useSelector((storeState: RootState) => storeState.appModule.items)
 	const isLoading = useSelector((storeState: RootState) => storeState.appModule.isLoading)
@@ -52,7 +52,7 @@ export function ItemDetails() {
 
 	if (!item || isLoading) return <Loader />
 	const shouldShowLongTxt = Math.random() > 0.5
-	
+
 	return <section className="item-details">
 		<Image imgUrl={item.imgUrl} altTxt={item.title} objectFit="contain" />
 
@@ -68,3 +68,5 @@ export function ItemDetails() {
 		</div>
 	</section>
 }
+
+export default ItemDetails

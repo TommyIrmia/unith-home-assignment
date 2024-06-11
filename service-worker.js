@@ -32,7 +32,7 @@ self.addEventListener('fetch', (event) => {
 								return fetchRes;
 							})
 						}).catch((error) => {
-							console.log('error fetching image', error)
+							console.error('error fetching image', error)
 						})
 				})
 		);

@@ -5,6 +5,7 @@ import { itemService } from "@/services/item.service"
 import { errorService } from "@/services/error.service"
 
 import { AppError } from "@/models/app.model"
+import { devLog } from "@/services/dev-log.service"
 
 
 export function setIsLoading(isLoading: boolean) {
@@ -30,8 +31,8 @@ export function setActiveItemId(itemId: string | null = null) {
 }
 
 export function setError(error: Partial<AppError>): AppError {
-	const errors = store.getState().appModule.errors || []
 	const errorToAdd = errorService.createError(error)
-	store.dispatch({ type: AppActionType.SET_ERRORS, errors: [...errors, errorToAdd] })
+	devLog('Error added to store : ', errorToAdd)
+	store.dispatch({ type: AppActionType.SET_ERROR, error: errorToAdd })
 	return errorToAdd
 }

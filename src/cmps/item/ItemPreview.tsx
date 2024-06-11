@@ -1,12 +1,13 @@
 import { Item } from "@/models/item.model"
 import { Image } from "@/cmps/common/Image"
+import { FC, memo } from "react"
 
 interface ItemPreviewProps {
 	item: Item
 	activeItemId: string | null
 }
 
-export function ItemPreview({ item, activeItemId }: ItemPreviewProps) {
+export const ItemPreview: FC<ItemPreviewProps> = memo(({ item, activeItemId }) => {
 
 	const { imgUrl, title, desc, id: itemId } = item
 	const isActive = activeItemId === itemId
@@ -23,4 +24,4 @@ export function ItemPreview({ item, activeItemId }: ItemPreviewProps) {
 			</p>
 		</div>
 	</article>
-}
+})
