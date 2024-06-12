@@ -1,5 +1,6 @@
-import NotFoundIcon from '@/assets/images/404.svg'
 import { Link } from 'react-router-dom'
+
+import NotFoundIcon from '@/assets/images/404.svg'
 
 function NotFound() {
 	return <section className="error-page not-found">

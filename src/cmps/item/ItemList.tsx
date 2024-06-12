@@ -1,11 +1,12 @@
+import { FC, memo, useMemo, useRef, useState } from "react"
 import { Link } from "react-router-dom"
 
-import { ItemPreview } from "@/cmps/item/ItemPreview"
-
-import { Item } from "@/models/item.model"
-import { FC, memo, useMemo, useRef, useState } from "react"
-import { NUM_ITEMS_TO_SHOW } from "@/services/const.service"
 import { useIntersectionObserver } from "@/customHooks/useIntersectionObserver"
+
+import { NUM_ITEMS_TO_SHOW } from "@/services/const.service"
+import { Item } from "@/models/item.model"
+
+import { ItemPreview } from "@/cmps/item/ItemPreview"
 
 interface ItemListProps {
 	items: Item[]

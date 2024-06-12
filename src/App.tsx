@@ -8,10 +8,10 @@ import { Navigate, Route, BrowserRouter as Router, Routes } from 'react-router-d
 const ItemIndex = lazy(() => import('@/pages/ItemIndex'));
 const ItemDetails = lazy(() => import('@/pages/ItemDetails'));
 const NotFound = lazy(() => import('@/pages/NotFound'));
+const FallbackRoute = lazy(() => import('@/cmps/common/FallbackRoute'));
 
 import { AppHeader } from '@/cmps/layout/AppHeader'
-import { FallbackRoute } from '@/cmps/common/FallbackRoute'
-import { Loader } from "./cmps/common/Loader";
+import { Loader } from "@/cmps/common/Loader";
 
 
 export function App() {

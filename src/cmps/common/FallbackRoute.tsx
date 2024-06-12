@@ -5,9 +5,11 @@ interface RouteFallbackProps {
 	children: ReactNode
 }
 
-export function FallbackRoute({ children }: RouteFallbackProps) {
+function FallbackRoute({ children }: RouteFallbackProps) {
 	const location = useLocation()
 	if (location.pathname.includes('item')) return <Navigate to="/item" />
 	return children
 }
+
+export default FallbackRoute
 

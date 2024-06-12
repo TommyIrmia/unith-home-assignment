@@ -1,6 +1,7 @@
+import { FC, memo } from "react"
+
 import { Item } from "@/models/item.model"
 import { Image } from "@/cmps/common/Image"
-import { FC, memo } from "react"
 
 interface ItemPreviewProps {
 	item: Item
